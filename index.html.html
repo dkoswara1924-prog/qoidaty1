@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="id" dir="ltr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qaidaty Jilid 1 - Belajar Baca Arab Gundul Interaktif</title>
+  
+  <!-- Tailwind CSS & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Amiri -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            emerald: {
+              800: '#065f46',
+              850: '#064e3b',
+              900: '#022c22',
+              950: '#011c16'
+            },
+            gold: {
+              300: '#fde047',
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+              700: '#b45309'
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            arabic: ['Amiri', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .arabic-font {
+      font-family: 'Amiri', serif;
+      direction: rtl;
+    }
+    .arabesque-pattern {
+      background-color: #022c22;
+      background-image: radial-gradient(#d97706 0.75px, transparent 0.75px), radial-gradient(#064e3b 0.75px, #022c22 0.75px);
+      background-size: 28px 28px;
+      background-position: 0 0, 14px 14px;
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #022c22;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #064e3b;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #d97706;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-gold-500 selection:text-slate-950">
+
+  <!-- Top Islamic Header Banner -->
+  <header class="arabesque-pattern text-white border-b-4 border-gold-500 shadow-2xl relative overflow-hidden">
+    <div class="absolute -top-24 -right-24 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 relative z-10">
+      <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div class="space-y-3 text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-900/90 border border-gold-500/40 text-gold-400 text-xs font-semibold uppercase tracking-wider shadow-sm">
+            <i data-lucide="book-open-check" class="w-4 h-4 text-gold-400"></i>
+            Metode QAIDATY (Jilid 1) • Karya Ust. Yasin Muthohar
+          </div>
+          <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white flex flex-wrap items-center justify-center lg:justify-start gap-3">
+            <span class="arabic-font text-gold-400 text-4xl sm:text-6xl font-bold">قَاعِدَتِي</span>
+            <span class="font-light text-slate-300">| Qaidaty Interactive</span>
+          </h1>
+          <p class="text-emerald-100 text-sm sm:text-base max-w-2xl leading-relaxed">
+            Panduan Sistematis & Praktis Membaca Arab Gundul melalui Integrasi Logika <strong class="text-gold-400 font-semibold">Ilmu Shorof</strong> (Rekonstruksi Kata) dan <strong class="text-gold-400 font-semibold">Ilmu Nahwu</strong> (Penentuan Harakat Akhir).
+          </p>
+        </div>
+
+        <div class="bg-emerald-950/80 border border-gold-500/40 p-5 rounded-2xl shadow-inner text-center backdrop-blur-sm max-w-md w-full">
+          <p class="arabic-font text-2xl sm:text-3xl text-gold-400 font-bold mb-2 leading-loose">
+            الشَّرَفُ فِي الْعِلْمِ بِحَسَبِ شَرَفِ الْمَعْلُومِ
+          </p>
+          <p class="text-xs text-emerald-200 border-t border-emerald-800/80 pt-2 font-medium">
+            "Kemuliaan ilmu bergantung pada kemuliaan hal yang dipelajari."
+          </p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sticky Navigation Tabs -->
+  <nav class="sticky top-0 z-40 bg-emerald-950 border-b border-gold-500/30 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between gap-2 overflow-x-auto py-3 no-scrollbar" id="navContainer">
+        <button onclick="switchTab('stepLogic')" id="tab-stepLogic" class="nav-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2 transition whitespace-nowrap text-emerald-100 hover:bg-emerald-850 hover:text-white">
+          <i data-lucide="list-checks" class="w-4 h-4"></i> 5 Langkah Logika
+        </button>
+        <button onclick="switchTab('klasifikasi')" id="tab-klasifikasi" class="nav-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2 transition whitespace-nowrap text-emerald-100 hover:bg-emerald-850 hover:text-white">
+          <i data-lucide="layers" class="w-4 h-4"></i> 1. Klasifikasi Kata
+        </button>
+        <button onclick="switchTab('shorof')" id="tab-shorof" class="nav-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2 transition whitespace-nowrap text-emerald-100 hover:bg-emerald-850 hover:text-white">
+          <i data-lucide="cpu" class="w-4 h-4"></i> 2. Shorof & Tashrif
+        </button>
+        <button onclick="switchTab('isimGroup')" id="tab-isimGroup" class="nav-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2 transition whitespace-nowrap text-emerald-100 hover:bg-emerald-850 hover:text-white">
+          <i data-lucide="tags" class="w-4 h-4"></i> 3. Karakter Isim
+        </button>
+        <button onclick="switchTab('irab')" id="tab-irab" class="nav-btn active-tab px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition whitespace-nowrap bg-gold-500 text-slate-950 shadow-md">
+          <i data-lucide="shield-check" class="w-4 h-4"></i> 4. I'rab & Mabni
+        </button>
+        <button onclick="switchTab('kuis')" id="tab-kuis" class="nav-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2 transition whitespace-nowrap text-gold-400 hover:bg-gold-500/20">
+          <i data-lucide="trophy" class="w-4 h-4"></i> Kuis Interaktif
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-1 w-full space-y-8">
+
+    <!-- SECTION 0: 5 LANGKAH LOGIKA -->
+    <section id="sec-stepLogic" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+          <div>
+            <span class="text-xs font-extrabold text-emerald-900 bg-emerald-100 border border-emerald-300 px-3 py-1 rounded-md uppercase tracking-wider">Metode Dasar Qaidaty</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">5 Langkah Logika Membaca Arab Gundul</h2>
+          </div>
+          <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 flex items-center gap-3">
+            <i data-lucide="brain-circuit" class="w-8 h-8 text-emerald-700 shrink-0"></i>
+            <p class="text-xs text-emerald-950 font-medium">Shorof merekonstruksi kata, Nahwu menentukan harakat akhir kata dalam kalimat!</p>
+          </div>
+        </div>
+
+        <p class="text-slate-600 mt-4 text-sm sm:text-base leading-relaxed">
+          Membaca teks Arab tanpa harakat bukanlah sekadar menghafal, melainkan sebuah <strong>proses logika eksekusi 5 langkah sistematis</strong> berikut:
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mt-8">
+          <div class="bg-gradient-to-br from-emerald-900 to-emerald-950 text-white p-5 rounded-2xl border border-gold-500/30 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="w-8 h-8 rounded-full bg-gold-500 text-slate-950 font-black flex items-center justify-center text-sm mb-3 shadow">1</div>
+              <h3 class="font-bold text-gold-400 text-base mb-1">Identifikasi Kata</h3>
+              <p class="text-xs text-emerald-100 leading-relaxed">Tentukan apakah kata tersebut berjenis <strong>Isim</strong>, <strong>Fi’il</strong>, atau <strong>Harf</strong>.</p>
+            </div>
+            <span class="mt-4 text-[10px] uppercase font-bold text-emerald-300 tracking-wider">Tanda Kalimah</span>
+          </div>
+
+          <div class="bg-gradient-to-br from-slate-900 to-emerald-950 text-white p-5 rounded-2xl border border-slate-700 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="w-8 h-8 rounded-full bg-emerald-500 text-white font-black flex items-center justify-center text-sm mb-3 shadow">2</div>
+              <h3 class="font-bold text-emerald-300 text-base mb-1">Cek 'Amil Pengubah</h3>
+              <p class="text-xs text-slate-300 leading-relaxed">Periksa kata sebelumnya untuk menemukan faktor pengubah harakat (<em>'Amil Jar, Nashab, Jazm</em>).</p>
+            </div>
+            <span class="mt-4 text-[10px] uppercase font-bold text-emerald-400 tracking-wider">Deteksi 'Amil</span>
+          </div>
+
+          <div class="bg-gradient-to-br from-slate-900 to-emerald-950 text-white p-5 rounded-2xl border border-slate-700 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="w-8 h-8 rounded-full bg-emerald-500 text-white font-black flex items-center justify-center text-sm mb-3 shadow">3</div>
+              <h3 class="font-bold text-emerald-300 text-base mb-1">Status I’rab</h3>
+              <p class="text-xs text-slate-300 leading-relaxed">Tentukan status akhir kata: apakah <strong>Rofa’</strong>, <strong>Nashab</strong>, <strong>Jar</strong>, atau <strong>Jazm</strong>.</p>
+            </div>
+            <span class="mt-4 text-[10px] uppercase font-bold text-emerald-400 tracking-wider">Status Harakat</span>
+          </div>
+
+          <div class="bg-gradient-to-br from-slate-900 to-emerald-950 text-white p-5 rounded-2xl border border-slate-700 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="w-8 h-8 rounded-full bg-emerald-500 text-white font-black flex items-center justify-center text-sm mb-3 shadow">4</div>
+              <h3 class="font-bold text-emerald-300 text-base mb-1">Jabatan Kata</h3>
+              <p class="text-xs text-slate-300 leading-relaxed">Tentukan fungsi posisi kata dalam kalimat (misal: <em>Fa'il, Maful bih, Mubtada, Khabar</em>).</p>
+            </div>
+            <span class="mt-4 text-[10px] uppercase font-bold text-emerald-400 tracking-wider">Kedudukan Kalimat</span>
+          </div>
+
+          <div class="bg-gradient-to-br from-emerald-900 to-emerald-950 text-white p-5 rounded-2xl border border-gold-500/30 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="w-8 h-8 rounded-full bg-gold-500 text-slate-950 font-black flex items-center justify-center text-sm mb-3 shadow">5</div>
+              <h3 class="font-bold text-gold-400 text-base mb-1">Makna & Tashrif</h3>
+              <p class="text-xs text-emerald-100 leading-relaxed">Pastikan arti berdasarkan wazan shorof & pemahaman konteks kamus.</p>
+            </div>
+            <span class="mt-4 text-[10px] uppercase font-bold text-emerald-300 tracking-wider">Rekonstruksi Shorof</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1: KLASIFIKASI KATA -->
+    <section id="sec-klasifikasi" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+          <div>
+            <span class="text-xs font-bold text-emerald-800 bg-emerald-100 border border-emerald-300 px-3 py-1 rounded-md">MODUL 1</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">1. Klasifikasi Kata (الْكَلِمَةُ)</h2>
+          </div>
+          <div class="arabic-font text-3xl font-bold text-emerald-900 bg-emerald-50 px-5 py-2.5 rounded-2xl border border-emerald-200">
+            اَلْكَلِمَةُ : اِسْمٌ وَفِعْلٌ وَحَرْفٌ
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2.5 mt-6 pt-4 border-t border-slate-100" id="subTabKlasifikasiNav">
+          <button onclick="switchSubTabKlasifikasi('isim')" id="subtab-isim" class="subtab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition bg-emerald-800 text-gold-400 shadow-md">
+            <i data-lucide="tag" class="w-4 h-4"></i> A. Kalimah Isim
+          </button>
+          <button onclick="switchSubTabKlasifikasi('fiil')" id="subtab-fiil" class="subtab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 hover:text-slate-900 transition">
+            <i data-lucide="activity" class="w-4 h-4"></i> B. Kalimah Fi’il
+          </button>
+          <button onclick="switchSubTabKlasifikasi('harf')" id="subtab-harf" class="subtab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 hover:text-slate-900 transition">
+            <i data-lucide="link" class="w-4 h-4"></i> C. Kalimah Harf
+          </button>
+        </div>
+      </div>
+
+      <div id="subsec-isim" class="subtab-content bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+        <p class="text-xs text-slate-600">Materi Isim mencakup 8 tanda pengenal utama (Ma-mi-mu, Al-, Tanwin, Ta' marbuthah, Harf Jar, Nida, Nashab Inna, dan Idhafah).</p>
+      </div>
+      <div id="subsec-fiil" class="subtab-content hidden bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+        <p class="text-xs text-slate-600">Materi Fi'il mencakup 4 jenis: Fi'il Madhi, Mudhari', Amr, dan Nahyi.</p>
+      </div>
+      <div id="subsec-harf" class="subtab-content hidden bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+        <p class="text-xs text-slate-600">Materi Harf mencakup Harf 'Athilah dan Harf 'Aamilah.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 2: SHOROF -->
+    <section id="sec-shorof" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200">
+        <h2 class="text-2xl font-bold text-slate-900">2. Ilmu Shorof & Pola Perubahan Kata</h2>
+        <p class="text-xs text-slate-600 mt-2">Mencakup Wazan/Zaidah, Tashrif Istilahi/Lughawi, Isim Musytaq, dan Fi'il Lazim vs Muta'addi.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 3: KARAKTER ISIM -->
+    <section id="sec-isimGroup" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200">
+        <h2 class="text-2xl font-bold text-slate-900">3. Pembagian & Karakteristik Isim</h2>
+        <p class="text-xs text-slate-600 mt-2">Mencakup Jenis (Mudzakkar/Muannats), Kuantitas (Mufrad/Mutsanna/Jama'), dan Kejelasan (Nakirah/Ma'rifah).</p>
+      </div>
+    </section>
+
+    <!-- SECTION 4: STATUS HARAKAT AKHIR (ISIM MU'ROB VS MABNI) - FULL EXPANDED MODUL 4 -->
+    <section id="sec-irab" class="tab-content space-y-6">
+      
+      <!-- Section Intro & Navigation Pills for Modul 4 -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+          <div>
+            <span class="text-xs font-extrabold text-emerald-800 bg-emerald-100 border border-emerald-300 px-3 py-1 rounded-md uppercase tracking-wider">MODUL 4</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">4. Status Harakat Akhir: Isim Mu’rob vs Isim Mabni</h2>
+          </div>
+          <div class="arabic-font text-3xl font-bold text-emerald-900 bg-emerald-50 px-5 py-2.5 rounded-2xl border border-emerald-200">
+            اَلْمُعْرَبُ وَالْمَبْنِيُّ مِنَ الْأَسْمَاءِ
+          </div>
+        </div>
+
+        <p class="text-slate-600 mt-4 text-sm sm:text-base leading-relaxed">
+          Berdasarkan kestabilan harakat di akhir katanya ketika dipengaruhi 'Amil, Kalimah Isim diklasifikasikan ke dalam dua kelompok utama: <strong>Isim Mu'rob</strong> (harakat/huruf akhirnya fleksibel dan berubah-ubah) dan <strong>Isim Mabni</strong> (harakat akhirnya paten/tidak pernah berubah).
+        </p>
+
+        <!-- Sub-Tab Navigation Pills for Modul 4 -->
+        <div class="flex flex-wrap items-center gap-2.5 mt-6 pt-4 border-t border-slate-100" id="subTabIrabNav">
+          <button onclick="switchSubTabIrab('murob')" id="subtab-irab-murob" class="subtab-irab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition bg-emerald-800 text-gold-400 shadow-md">
+            <i data-lucide="sliders" class="w-4 h-4"></i> A. Isim Mu’rob (Fleksibel / I'rab)
+          </button>
+          <button onclick="switchSubTabIrab('mabni')" id="subtab-irab-mabni" class="subtab-irab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 hover:text-slate-900 transition">
+            <i data-lucide="lock" class="w-4 h-4"></i> B. Isim Mabni (Paten / Bina')
+          </button>
+        </div>
+      </div>
+
+      <!-- SUBTAB 4.A: ISIM MU'ROB -->
+      <div id="subsec-irab-murob" class="subtab-irab-content bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-8">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-100 pb-4">
+          <div>
+            <span class="text-xs font-bold text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full uppercase">Bagian 4.A</span>
+            <h3 class="text-xl sm:text-2xl font-bold text-slate-900 mt-1">A. Isim Mu’rob (اَلِاسْمُ الْمُعْرَبُ — Fleksibel)</h3>
+          </div>
+          <span class="arabic-font text-2xl font-bold text-emerald-900 bg-emerald-50 px-4 py-1.5 rounded-xl border border-emerald-200">اَلِاسْمُ الْمُعْرَبُ</span>
+        </div>
+
+        <!-- Tree Diagram for Mu'rob -->
+        <div class="bg-slate-900 text-white p-6 rounded-2xl border border-slate-800 space-y-4">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-gold-400 text-center">Bagan Klasifikasi Isim Mu'rob (Harakat vs Huruf)</h4>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+            <div class="bg-slate-800/90 p-4 rounded-xl border border-slate-700 space-y-2">
+              <span class="font-bold text-emerald-400 block border-b border-slate-700 pb-1">1. Mu'rob dengan Harakat (ـُ / ـَ / ـِ)</span>
+              <ul class="text-slate-300 space-y-1">
+                <li>• Isim Mufrad (البيتُ / البيتَ / البيتِ)</li>
+                <li>• Jama' Taksir (البيوتُ / البيوتَ / البيوتِ)</li>
+                <li>• Jama' Muannats Salim (المسلماتُ / المسلماتِ)</li>
+                <li>• Isim Ghair Munsharif (أحمدُ / أحمدَ)</li>
+              </ul>
+            </div>
+            <div class="bg-slate-800/90 p-4 rounded-xl border border-slate-700 space-y-2">
+              <span class="font-bold text-gold-400 block border-b border-slate-700 pb-1">2. Mu'rob dengan Huruf (و / ا / ي)</span>
+              <ul class="text-slate-300 space-y-1">
+                <li>• Mutsanna / Ganda (البيتانِ / البيتينِ)</li>
+                <li>• Jama' Mudzakkar Salim (المسلمونَ / المسلمينَ)</li>
+                <li>• Asma'ul Khamsah (أبوك / أباك / أبيك)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1. Mu'rob Harakat Asli Table -->
+        <div class="space-y-4">
+          <h4 class="text-base font-bold text-slate-900 uppercase tracking-wider border-l-4 border-gold-500 pl-3">
+            1. Tanda I'rob Menggunakan Harakat Asli & Pengecualiannya:
+          </h4>
+
+          <div class="overflow-x-auto rounded-2xl border border-slate-200">
+            <table class="w-full text-xs sm:text-sm text-left text-slate-700">
+              <thead class="text-xs uppercase bg-emerald-950 text-gold-400">
+                <tr>
+                  <th class="px-4 py-3.5">Jenis Isim Mu'rob</th>
+                  <th class="px-4 py-3.5 text-center">Rofa’ (Dhommah)</th>
+                  <th class="px-4 py-3.5 text-center">Nashab (Fathah / Kasrah)</th>
+                  <th class="px-4 py-3.5 text-center">Jar / Khafdh (Kasrah / Fathah)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 bg-white font-medium">
+                <tr class="hover:bg-slate-50">
+                  <td class="px-4 py-3 font-bold text-slate-900">
+                    Isim Mufrad
+                    <span class="block text-[10px] text-slate-500 font-normal">Tunggal</span>
+                  </td>
+                  <td class="px-4 py-3 text-center arabic-font font-bold text-emerald-900 text-base">اَلْبَيْتُ / بَيْتٌ</td>
+                  <td class="px-4 py-3 text-center arabic-font font-bold text-blue-900 text-base">اَلْبَيْتَ / بَيْتًا</td>
+                  <td class="px-4 py-3 text-center arabic-font font-bold text-rose-900 text-base">اَلْبَيْتِ / بَيْتٍ</td>
+                </tr>
+                <tr class="hover:bg-slate-50">
+                  <td class="px-4 py-3 font-bold text-slate-900">
+                    Jama’ Taksir
+                    <span class="block text-[10px] text-slate-500 font-normal">Jamak Tak Beraturan</span>
+                  </td>
+                  <td class="px-4 py-3 text-center arabic-font font-bold text-emerald-900 text-base">اَلْبُيُوتُ / بُيُوتٌ</td>
+                  <td class="px-4 py-3 text-center arabic-font font-bold text-blue-900 text-base">اَلْبُيُوتَ / بُيُوتًا</td>
+                  <td class="px-4 py-3 text-center arabic-font font-bold text-rose-900 text-base">اَلْبُيُوتِ / بُيُوتٍ</td>
+                </tr>
+                <tr class="hover:bg-slate-50 bg-rose-50/40">
+                  <td class="px-4 py-3 font-bold text-slate-900">
+                    Jama’ Muannats Salim
+                    <span class="block text-[10px] text-rose-800 font-bold">★ Nashab kasrah (tanpa fathah)</span>
+                  </td>
+                  <td class="px-4 py-3 text-center arabic-font font-bold text-emerald-900 text-base">مُسْلِمَاتٌ</td>
+                  <td class="px-4 py-3 text-center arabic-font font-bold text-rose-900 text-base bg-rose-100/60">مُسْلِمَاتٍ (Kasrah)</td>
+                  <td class="px-4 py-3 text-center arabic-font font-bold text-rose-900 text-base">مُسْلِمَاتٍ (Kasrah)</td>
+                </tr>
+                <tr class="hover:bg-slate-50 bg-amber-50/40">
+                  <td class="px-4 py-3 font-bold text-slate-900">
+                    Isim Ghair Munsharif
+                    <span class="block text-[10px] text-amber-800 font-bold">★ Jar fathah (bila tanpa Al/Idhafah)</span>
+                  </td>
+                  <td class="px-4 py-3 text-center arabic-font font-bold text-emerald-900 text-base">أَحْمَدُ</td>
+                  <td class="px-4 py-3 text-center arabic-font font-bold text-blue-900 text-base">أَحْمَدَ</td>
+                  <td class="px-4 py-3 text-center arabic-font font-bold text-amber-900 text-base bg-amber-100/60">مِنْ أَحْمَدَ (Fathah)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600 leading-relaxed">
+            💡 <strong>Catatan Ghair Munsharif:</strong> Jika Isim Ghair Munsharif dimasuki awalan Al- atau diidhafahkan, maka jar-nya kembali kasrah: <span class="arabic-font font-bold text-slate-900 text-sm">مِنَ الْمَسَاجِدِ • مِنْ مَسَاجِدِ الْمُسْلِمِينَ</span>.
+          </div>
+        </div>
+
+        <!-- 2. Mu'rob Huruf Table (Mutsanna, Jama' Mudzakkar Salim, Asma'ul Khamsah) -->
+        <div class="space-y-4 pt-4">
+          <h4 class="text-base font-bold text-slate-900 uppercase tracking-wider border-l-4 border-gold-500 pl-3">
+            2. Tanda I'rob Menggunakan Huruf (Niyabah / Pengganti):
+          </h4>
+
+          <div class="overflow-x-auto rounded-2xl border border-slate-200">
+            <table class="w-full text-xs sm:text-sm text-left text-slate-700">
+              <thead class="text-xs uppercase bg-slate-900 text-emerald-400">
+                <tr>
+                  <th class="px-4 py-3.5">Jenis Isim Mu'rob Huruf</th>
+                  <th class="px-4 py-3.5 text-center">Rofa’ (Alif / Wawu)</th>
+                  <th class="px-4 py-3.5 text-center">Nashab (Ya’ / Alif)</th>
+                  <th class="px-4 py-3.5 text-center">Jar (Ya’)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 bg-white font-medium">
+                <tr class="hover:bg-slate-50">
+                  <td class="px-4 py-3 font-bold text-slate-900">
+                    Isim Mutsanna (Dua)
+                  </td>
+                  <td class="px-4 py-3 text-center arabic-font font-bold text-emerald-900 text-base">Alif (الْبَيْتَانِ)</td>
+                  <td class="px-4 py-3 text-center arabic-font font-bold text-blue-900 text-base">Ya’ (الْبَيْتَيْنِ)</td>
+                  <td class="px-4 py-3 text-center arabic-font font-bold text-rose-900 text-base">Ya’ (الْبَيْتَيْنِ)</td>
+                </tr>
+                <tr class="hover:bg-slate-50">
+                  <td class="px-4 py-3 font-bold text-slate-900">
+                    Jama’ Mudzakkar Salim
+                  </td>
+                  <td class="px-4 py-3 text-center arabic-font font-bold text-emerald-900 text-base">Wawu (الْمُسْلِمُونَ)</td>
+                  <td class="px-4 py-3 text-center arabic-font font-bold text-blue-900 text-base">Ya’ (الْمُسْلِمِينَ)</td>
+                  <td class="px-4 py-3 text-center arabic-font font-bold text-rose-900 text-base">Ya’ (الْمُسْلِمِينَ)</td>
+                </tr>
+                <tr class="hover:bg-slate-50 bg-gold-50/40">
+                  <td class="px-4 py-3 font-bold text-slate-900">
+                    Asma’ul Khamsah (Isim Lima)
+                    <span class="block text-[10px] text-slate-500 font-normal">أَبٌ، أَخٌ، حَمٌ، فَمٌ، ذُو</span>
+                  </td>
+                  <td class="px-4 py-3 text-center arabic-font font-bold text-emerald-900 text-base">Wawu (أَبُو مُحَمَّدٍ)</td>
+                  <td class="px-4 py-3 text-center arabic-font font-bold text-blue-900 text-base">Alif (أَبَا مُحَمَّدٍ)</td>
+                  <td class="px-4 py-3 text-center arabic-font font-bold text-rose-900 text-base">Ya’ (أَبِي مُحَمَّدٍ)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Asma'ul Khamsah Detailed Grid -->
+          <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3 text-xs">
+            <span class="font-bold text-slate-900 uppercase tracking-wider block">Deretan Contoh Penerapan Asma'ul Khamsah di dalam Buku:</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+              <div class="bg-white p-3 rounded-xl border border-slate-200">
+                <span class="font-bold text-emerald-800 block mb-1">1. أَبٌ (Ayah):</span>
+                <div class="arabic-font font-bold text-sm text-slate-900">قَالَ أَبُو مُحَمَّدٍ <span class="text-xs font-sans text-slate-500">(Rofa')</span></div>
+                <div class="arabic-font font-bold text-sm text-slate-900">رَأَيْتُ أَبَا مُحَمَّدٍ <span class="text-xs font-sans text-slate-500">(Nashab)</span></div>
+                <div class="arabic-font font-bold text-sm text-slate-900">مِنْ أَبِي مُحَمَّدٍ <span class="text-xs font-sans text-slate-500">(Jar)</span></div>
+              </div>
+              <div class="bg-white p-3 rounded-xl border border-slate-200">
+                <span class="font-bold text-emerald-800 block mb-1">2. أَخٌ (Saudara):</span>
+                <div class="arabic-font font-bold text-sm text-slate-900">قَالَ أَخُو فَاطِمَةَ</div>
+                <div class="arabic-font font-bold text-sm text-slate-900">رَأَيْتُ أَخَا مُحَمَّدٍ</div>
+                <div class="arabic-font font-bold text-sm text-slate-900">مِنْ أَخِي مُحَمَّدٍ</div>
+              </div>
+              <div class="bg-white p-3 rounded-xl border border-slate-200">
+                <span class="font-bold text-emerald-800 block mb-1">3. حَمٌ (Ipar/Mertua):</span>
+                <div class="arabic-font font-bold text-sm text-slate-900">قَالَ حَمُو زَيْنَبَ</div>
+                <div class="arabic-font font-bold text-sm text-slate-900">رَأَيْتُ حَمَا زَيْنَبَ</div>
+                <div class="arabic-font font-bold text-sm text-slate-900">مِنْ حَمِي زَيْنَبَ</div>
+              </div>
+              <div class="bg-white p-3 rounded-xl border border-slate-200">
+                <span class="font-bold text-emerald-800 block mb-1">4. فَمٌ (Mulut):</span>
+                <div class="arabic-font font-bold text-sm text-slate-900">قَالَ فُو عُمَرَ</div>
+                <div class="arabic-font font-bold text-sm text-slate-900">رَأَيْتُ فَا عُمَرَ</div>
+                <div class="arabic-font font-bold text-sm text-slate-900">مِنْ فِي عُمَرَ</div>
+              </div>
+              <div class="bg-white p-3 rounded-xl border border-slate-200 lg:col-span-2">
+                <span class="font-bold text-emerald-800 block mb-1">5. ذُو (Pemilik):</span>
+                <div class="arabic-font font-bold text-sm text-slate-900">قَالَ ذُو الْجَلَالِ • رَأَيْتُ ذَا الْجَلَالِ • مِنْ ذِي الْجَلَالِ</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. I'rab Muqoddaroh (Tersembunyi) -->
+        <div class="space-y-4 pt-4 border-t border-slate-200">
+          <h4 class="text-base font-bold text-slate-900 uppercase tracking-wider border-l-4 border-gold-500 pl-3">
+            3. I’rob Muqoddaroh (Harakat Tersembunyi / Perkiraan):
+          </h4>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                <h5 class="font-bold text-slate-900 text-sm">Isim Maqshur (اَلْمَقْصُورُ)</h5>
+                <span class="text-[10px] bg-emerald-100 text-emerald-900 px-2 py-0.5 rounded-full font-bold">Ta'addzur (Semua Tersembunyi)</span>
+              </div>
+              <p class="text-slate-600 leading-relaxed">
+                Isim berakhiran huruf alif lazimah (alif bengkok permanen). Seluruh harakat I'robnya (Rofa', Nashab, Jar) <strong>tidak dapat dimunculkan sama sekali</strong>.
+              </p>
+              <div class="bg-white p-3 rounded-xl border border-slate-200 space-y-1.5 font-bold">
+                <div class="flex justify-between"><span class="text-slate-500 font-normal">Rofa':</span> <span class="arabic-font text-base text-emerald-900">جَاءَ مُوسَى</span></div>
+                <div class="flex justify-between"><span class="text-slate-500 font-normal">Nashab:</span> <span class="arabic-font text-base text-blue-900">رَأَيْتُ مُوسَى</span></div>
+                <div class="flex justify-between"><span class="text-slate-500 font-normal">Jar:</span> <span class="arabic-font text-base text-rose-900">مِنْ مُوسَى</span></div>
+                <p class="text-[10px] font-normal text-slate-500 pt-1">Contoh lain: <span class="arabic-font font-bold">عِيسَى • اَلْفَتَى</span></p>
+              </div>
+            </div>
+
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                <h5 class="font-bold text-slate-900 text-sm">Isim Manqush (اَلْمَنْقُوصُ)</h5>
+                <span class="text-[10px] bg-blue-100 text-blue-900 px-2 py-0.5 rounded-full font-bold">Tsiqal (Rofa'/Jar Tersembunyi, Nashab Fathah)</span>
+              </div>
+              <p class="text-slate-600 leading-relaxed">
+                Isim berakhiran huruf ya' lazimah yang huruf sebelumnya kasrah. Harakat Rofa' dan Jar tersembunyi, namun <strong>Nashab-nya Zhahirah (Fathah tampak jelas)</strong>.
+              </p>
+              <div class="bg-white p-3 rounded-xl border border-slate-200 space-y-1.5 font-bold">
+                <div class="flex justify-between"><span class="text-slate-500 font-normal">Rofa':</span> <span class="arabic-font text-base text-emerald-900">قَالَ الْقَاضِي / جَاءَ قَاضٍ</span></div>
+                <div class="flex justify-between"><span class="text-slate-500 font-normal">Nashab (Fathah):</span> <span class="arabic-font text-base text-blue-900">رَأَيْتُ الْقَاضِيَ</span></div>
+                <div class="flex justify-between"><span class="text-slate-500 font-normal">Jar:</span> <span class="arabic-font text-base text-rose-900">مِنَ الْقَاضِي / مِنْ قَاضٍ</span></div>
+                <p class="text-[10px] font-normal text-slate-500 pt-1">Contoh lain: <span class="arabic-font font-bold">اَلدَّاعِي</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SUBTAB 4.B: ISIM MABNI -->
+      <div id="subsec-irab-mabni" class="subtab-irab-content hidden bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-8">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-100 pb-4">
+          <div>
+            <span class="text-xs font-bold text-slate-900 bg-slate-200 px-3 py-1 rounded-full uppercase">Bagian 4.B</span>
+            <h3 class="text-xl sm:text-2xl font-bold text-slate-900 mt-1">B. Isim Mabni (اَلِاسْمُ الْمَبْنِيُّ — Harakat Paten / Tidak Berubah)</h3>
+          </div>
+          <span class="arabic-font text-2xl font-bold text-slate-900 bg-slate-100 px-4 py-1.5 rounded-xl border border-slate-300">اَلِاسْمُ الْمَبْنِيُّ</span>
+        </div>
+
+        <!-- 4 Types of Bina' Box -->
+        <div class="bg-emerald-950 text-white p-5 rounded-2xl border border-gold-500/40 space-y-3">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-gold-400">4 Jenis Tanda Bangunan Akhir (Bina' Paten):</h4>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs text-center font-bold">
+            <div class="bg-emerald-900/80 p-3 rounded-xl border border-emerald-700"><span class="block text-emerald-300 font-normal">1. Mabni Dhammah</span><span class="arabic-font text-lg text-gold-400">حَيْثُ • مُنْذُ</span></div>
+            <div class="bg-emerald-900/80 p-3 rounded-xl border border-emerald-700"><span class="block text-emerald-300 font-normal">2. Mabni Fathah</span><span class="arabic-font text-lg text-gold-400">أَنْتَ • كَـ</span></div>
+            <div class="bg-emerald-900/80 p-3 rounded-xl border border-emerald-700"><span class="block text-emerald-300 font-normal">3. Mabni Kasrah</span><span class="arabic-font text-lg text-gold-400">أَنْتِ • هٰؤُلَاءِ</span></div>
+            <div class="bg-emerald-900/80 p-3 rounded-xl border border-emerald-700"><span class="block text-emerald-300 font-normal">4. Mabni Sukun</span><span class="arabic-font text-lg text-gold-400">مَا • مَنْ • إِذَا</span></div>
+          </div>
+        </div>
+
+        <h4 class="text-base font-bold text-slate-900 uppercase tracking-wider border-l-4 border-gold-500 pl-3">
+          5 Kelompok Utama Isim Mabni di dalam Buku Qaidaty:
+        </h4>
+
+        <!-- 5 Categories Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 text-xs">
+          
+          <!-- 1. Isim Dhamir -->
+          <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+              <span class="w-6 h-6 rounded-full bg-emerald-800 text-gold-400 font-bold flex items-center justify-center">1</span>
+              <h5 class="font-bold text-slate-900 text-sm">Isim Dhamir (Kata Ganti Persona)</h5>
+            </div>
+            <p class="text-slate-600">Terbagi atas Dhamir Mustatir (Tersembunyi) dan Dhamir Bariz (Tampak: Muttashil & Munfashil):</p>
+            <div class="space-y-2 font-medium">
+              <div class="bg-white p-3 rounded-xl border border-slate-200">
+                <span class="font-bold text-emerald-900 block mb-1">• Dhamir Muttashil (Menyatu):</span>
+                <p>- Rofa' (Fa'il): <span class="arabic-font font-bold text-sm text-slate-900">ضَرَبْتُ • ضَرَبْتَ • ضَرَبْنَا</span></p>
+                <p>- Nashab (Maf'ul/Isim Inna): <span class="arabic-font font-bold text-sm text-slate-900">ضَرَبَهُ • إِنَّهُ • لَيْتَنِي</span></p>
+                <p>- Jar (Mudhaf Ilaih/Harf Jar): <span class="arabic-font font-bold text-sm text-slate-900">كِتَابُهُ • قَلَمِي • بِهِ • عَلَيْنَا</span></p>
+              </div>
+              <div class="bg-white p-3 rounded-xl border border-slate-200">
+                <span class="font-bold text-emerald-900 block mb-1">• Dhamir Munfashil (Terpisah):</span>
+                <p>- Rofa' (Mubtada): <span class="arabic-font font-bold text-sm text-slate-900">هُوَ سَاجِدٌ • هُمْ سَاجِدُونَ • أَنَا • نَحْنُ</span></p>
+                <p>- Nashab (Objek Khusus): <span class="arabic-font font-bold text-sm text-slate-900">إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Isim Isyarah -->
+          <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+              <span class="w-6 h-6 rounded-full bg-emerald-800 text-gold-400 font-bold flex items-center justify-center">2</span>
+              <h5 class="font-bold text-slate-900 text-sm">Isim Isyarah (Kata Tunjuk)</h5>
+            </div>
+            <p class="text-slate-600">Kata penunjuk acuan posisi objek (kata setelahnya disebut Musyar Ilaih):</p>
+            <div class="space-y-2 font-medium">
+              <div class="bg-white p-3 rounded-xl border border-slate-200">
+                <span class="font-bold text-emerald-900 block mb-1">• Jarak Dekat ("Ini"):</span>
+                <div class="arabic-font text-base text-slate-900 font-bold leading-loose">
+                  هٰذَا عَالِمٌ • هٰذِهِ عَالِمَةٌ • هٰؤُلَاءِ عَالِمُونَ
+                </div>
+              </div>
+              <div class="bg-white p-3 rounded-xl border border-slate-200">
+                <span class="font-bold text-emerald-900 block mb-1">• Jarak Jauh ("Itu"):</span>
+                <div class="arabic-font text-base text-slate-900 font-bold leading-loose">
+                  ذٰلِكَ عَالِمٌ • تِلْكَ عَالِمَةٌ • أُولٰئِكَ عَالِمُونَ
+                </div>
+              </div>
+              <div class="bg-white p-3 rounded-xl border border-slate-200">
+                <span class="font-bold text-emerald-900 block mb-1">• Penunjuk Tempat:</span>
+                <div class="arabic-font text-base text-slate-900 font-bold">
+                  هُنَا (di sini) • هٰهُنَا • هُنَاكَ (di situ) • هُنَالِكَ (di sana jauh)
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Isim Maushul -->
+          <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+              <span class="w-6 h-6 rounded-full bg-emerald-800 text-gold-400 font-bold flex items-center justify-center">3</span>
+              <h5 class="font-bold text-slate-900 text-sm">Isim Maushul (Kata Sambung "Yang")</h5>
+            </div>
+            <p class="text-slate-600">Kata penghubung yang membutuhkan Shilah Maushul & 'Aa-id:</p>
+            <div class="space-y-2 font-medium">
+              <div class="bg-white p-3 rounded-xl border border-slate-200">
+                <span class="font-bold text-emerald-900 block mb-1">• Maushul Nash (Spesifik Gender & Jumlah):</span>
+                <p>- Lk: <span class="arabic-font font-bold text-sm text-slate-900">اَلَّذِي (tunggal) • اَللَّذَانِ (dua) • اَلَّذِينَ (jamak)</span></p>
+                <p>- Pr: <span class="arabic-font font-bold text-sm text-slate-900">اَلَّتِي (tunggal) • اَللَّتَانِ (dua) • اَللَّاتِي / اَللَّائِي (jamak)</span></p>
+              </div>
+              <div class="bg-white p-3 rounded-xl border border-slate-200">
+                <span class="font-bold text-emerald-900 block mb-1">• Maushul Musytarak (Universal):</span>
+                <div class="arabic-font text-base text-slate-900 font-bold">
+                  مَنْ (siapa saja) • مَا (apa saja) • أَيٌّ (mana saja)
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Isim Istifham -->
+          <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+              <span class="w-6 h-6 rounded-full bg-emerald-800 text-gold-400 font-bold flex items-center justify-center">4</span>
+              <h5 class="font-bold text-slate-900 text-sm">Isim Istifham (Kata Tanya)</h5>
+            </div>
+            <p class="text-slate-600">Kata benda pengaju pertanyaan (Isim setelah Kam berstatus Nashab Tamyiz):</p>
+            <div class="bg-white p-3.5 rounded-xl border border-slate-200 space-y-2 font-medium">
+              <p>• <span class="font-bold text-emerald-900">مَا / مَاذَا:</span> <span class="arabic-font font-bold text-base text-slate-900">مَا الْقَارِعَةُ؟ • مَاذَا عَمِلَ الْمُسْلِمُونَ؟</span></p>
+              <p>• <span class="font-bold text-emerald-900">مَنْ / مَنْ ذَا:</span> <span class="arabic-font font-bold text-base text-slate-900">مَنْ مُحَمَّدٌ؟ • مَنْ ذَا الَّذِي يُقْرِضُ اللهَ؟</span></p>
+              <p>• <span class="font-bold text-emerald-900">أَيْنَ / مَتَى / كَيْفَ:</span> <span class="arabic-font font-bold text-base text-slate-900">أَيْنَ الْأُسْتَاذُ؟ • مَتَى السَّاعَةُ؟ • كَيْفَ حَالُكَ؟</span></p>
+              <p>• <span class="font-bold text-emerald-900">كَمْ (Berapa):</span> <span class="arabic-font font-bold text-base text-slate-900">كَمْ رَجُلًا فِي الدَّارِ؟</span></p>
+            </div>
+          </div>
+
+          <!-- 5. Isim Fi'il (Expanded Full Grid) -->
+          <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3 lg:col-span-2">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+              <span class="w-6 h-6 rounded-full bg-emerald-800 text-gold-400 font-bold flex items-center justify-center">5</span>
+              <h5 class="font-bold text-slate-900 text-sm">Isim Fi’il (Kata Benda Bermakna Kata Kerja)</h5>
+            </div>
+            <p class="text-slate-600">Kata benda khusus yang beramal seperti fi'il (merofakan fa'il/menashabkan maful) namun tidak menerima tanda fisik fi'il:</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-medium">
+              <div class="bg-white p-3.5 rounded-xl border border-slate-200 space-y-1">
+                <span class="font-bold text-emerald-800 block border-b border-slate-100 pb-1">• Bermakna Fi'il Madhi:</span>
+                <p class="arabic-font text-base font-bold text-slate-900">هَيْهَاتَ (jauh sekali)</p>
+                <p class="arabic-font text-base font-bold text-slate-900">شَتَّانَ (telah berbeda jauh)</p>
+                <p class="arabic-font text-base font-bold text-slate-900">سَرْعَانَ (alangkah cepatnya)</p>
+              </div>
+              <div class="bg-white p-3.5 rounded-xl border border-slate-200 space-y-1">
+                <span class="font-bold text-emerald-800 block border-b border-slate-100 pb-1">• Bermakna Fi'il Mudhari':</span>
+                <p class="arabic-font text-base font-bold text-slate-900">أُفٍّ (aku mengeluh/bosan)</p>
+                <p class="arabic-font text-base font-bold text-slate-900">قَطْ / قَطْنِي (cukuplah)</p>
+                <p class="arabic-font text-base font-bold text-slate-900">آهِ (aku merintih)</p>
+                <p class="arabic-font text-base font-bold text-slate-900">وَيْ (aku heran/takjub)</p>
+              </div>
+              <div class="bg-white p-3.5 rounded-xl border border-slate-200 space-y-1">
+                <span class="font-bold text-emerald-800 block border-b border-slate-100 pb-1">• Bermakna Fi'il Amr:</span>
+                <p class="arabic-font text-base font-bold text-slate-900">صَهْ (diamlah!) • مَهْ (hentikan!)</p>
+                <p class="arabic-font text-base font-bold text-slate-900">حَيَّ (kemarilah!) • آمِينَ (kabulkan!)</p>
+                <p class="arabic-font text-base font-bold text-slate-900">هَيَّا • هَلُمَّ • هَاكَ • رُوَيْدَكَ</p>
+                <p class="arabic-font text-base font-bold text-slate-900">عَلَيْكَ (tetaplah!) • إِلَيْكَ (ambillah!)</p>
+              </div>
+            </div>
+
+            <div class="bg-emerald-950 text-white p-4 rounded-xl border border-emerald-800 space-y-2">
+              <span class="text-xs font-bold text-gold-400 block uppercase tracking-wider">Deretan Contoh Penerapan Kalimat Isim Fi'il di Buku:</span>
+              <div class="arabic-font text-base font-bold text-emerald-200 leading-loose">
+                • هَيْهَاتَ هَيْهَاتَ لِمَا تُوعَدُونَ <br>
+                • شَتَّانَ مَا بَيْنَ الْعِلْمِ وَالْجَهْلِ <br>
+                • فَلَا تَقُلْ لَهُمَا أُفٍّ <br>
+                • صَهْ عَمَّا يَشِينُكَ مِنَ الْكَلَامِ <br>
+                • حَيَّ عَلَى الصَّلَاةِ، حَيَّ عَلَى الْفَلَاحِ <br>
+                • عَلَيْكَ بِالرِّفْقِ فِي مُعَامَلَةِ الْحَيَوَانِ
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SECTION 5: KUIS INTERAKTIF COMPREHENSIVE -->
+    <section id="sec-kuis" class="tab-content hidden space-y-6">
+      <div class="bg-emerald-950 rounded-3xl p-6 sm:p-10 text-white border border-gold-500/40 shadow-2xl relative overflow-hidden">
+        
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-emerald-800 pb-5">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-900 text-gold-400 text-xs font-bold uppercase tracking-wider mb-2">
+              <i data-lucide="award" class="w-4 h-4"></i> Uji Pemahaman Komprehensif
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Kuis Qaidaty Jilid 1</h2>
+          </div>
+          <button onclick="resetQuiz()" class="text-xs bg-gold-500 hover:bg-gold-600 text-slate-950 font-extrabold py-2.5 px-5 rounded-xl transition flex items-center gap-2 shadow-md">
+            <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Mulai Ulang Kuis
+          </button>
+        </div>
+
+        <div class="mt-8 bg-emerald-900/80 p-6 sm:p-8 rounded-2xl border border-emerald-800 shadow-inner max-w-3xl mx-auto" id="quizContainer">
+          <div class="flex justify-between items-center text-xs text-emerald-300 mb-4 font-bold">
+            <span id="quizProgressText">Soal 1 dari 5</span>
+            <span id="quizScoreText">Skor: 0</span>
+          </div>
+
+          <p class="text-sm sm:text-base font-semibold text-emerald-100 mb-2" id="quizQuestionText">
+            Soal: Tentukan jenis kata dan tanda pengenalnya dari lafazh berikut:
+          </p>
+
+          <div class="arabic-font text-4xl sm:text-5xl font-bold text-gold-400 text-center py-8 bg-emerald-950/90 rounded-2xl border border-emerald-700/80 my-4 shadow-inner" id="quizArabicWord">
+            مِنَ الْمَسْجِدِ
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6" id="quizOptionsBox"></div>
+
+          <div id="quizFeedbackBox" class="mt-5 p-4 rounded-xl text-center text-sm font-semibold hidden"></div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-emerald-950 text-emerald-400 py-8 border-t border-emerald-900 text-xs text-center">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="flex items-center gap-2">
+        <span class="arabic-font text-xl text-gold-400 font-bold">قَاعِدَتِي</span>
+        <span>• Aplikasi Pembelajaran Praktis Baca Arab Gundul (Jilid 1)</span>
+      </div>
+      <p class="text-emerald-500">Berdasarkan Karya Ust. Yasin Muthohar • Ready for GitHub Pages</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript Logic Engine -->
+  <script>
+    lucide.createIcons();
+
+    // Sub-Tab Switcher for Modul 1 (Klasifikasi Kata)
+    function switchSubTabKlasifikasi(subId) {
+      const subSecs = ['isim', 'fiil', 'harf'];
+      subSecs.forEach(id => {
+        const el = document.getElementById('subsec-' + id);
+        if (el) {
+          if (id === subId) el.classList.remove('hidden');
+          else el.classList.add('hidden');
+        }
+        const btn = document.getElementById('subtab-' + id);
+        if (btn) {
+          if (id === subId) btn.className = 'subtab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition bg-emerald-800 text-gold-400 shadow-md';
+          else btn.className = 'subtab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 hover:text-slate-900 transition';
+        }
+      });
+      lucide.createIcons();
+    }
+
+    // Sub-Tab Switcher for Modul 4 (Status Harakat Akhir: Mu'rob vs Mabni)
+    function switchSubTabIrab(subId) {
+      const irabSecs = ['murob', 'mabni'];
+      irabSecs.forEach(id => {
+        const el = document.getElementById('subsec-irab-' + id);
+        if (el) {
+          if (id === subId) el.classList.remove('hidden');
+          else el.classList.add('hidden');
+        }
+
+        const btn = document.getElementById('subtab-irab-' + id);
+        if (btn) {
+          if (id === subId) btn.className = 'subtab-irab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition bg-emerald-800 text-gold-400 shadow-md';
+          else btn.className = 'subtab-irab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 hover:text-slate-900 transition';
+        }
+      });
+      lucide.createIcons();
+    }
+
+    // Main Navigation Tab Switching Function
+    function switchTab(tabId) {
+      const sections = document.querySelectorAll('.tab-content');
+      sections.forEach(sec => sec.classList.add('hidden'));
+
+      const targetSec = document.getElementById('sec-' + tabId);
+      if (targetSec) targetSec.classList.remove('hidden');
+
+      const navBtns = document.querySelectorAll('.nav-btn');
+      navBtns.forEach(btn => {
+        btn.classList.remove('active-tab', 'bg-gold-500', 'text-slate-950', 'shadow-md', 'font-bold');
+        btn.classList.add('text-emerald-100', 'font-semibold');
+      });
+
+      const activeBtn = document.getElementById('tab-' + tabId);
+      if (activeBtn) {
+        activeBtn.classList.add('active-tab', 'bg-gold-500', 'text-slate-950', 'shadow-md', 'font-bold');
+        activeBtn.classList.remove('text-emerald-100');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Comprehensive Quiz Engine
+    const quizQuestions = [
+      {
+        word: 'مِنَ الْمَسْجِدِ',
+        question: 'Tentukan jenis kalimah kata "الْمَسْجِدِ" dan alasan harakat akhirnya kasrah:',
+        options: [
+          'Isim (Tanda Al- & Harf Jar min), Status Jar karena amil jar.',
+          'Fi\'il Madhi karena diawali mim.',
+          'Isim Mabni yang tidak bisa berubah harakat.',
+          'Harf Athilah tanpa pengaruh amil.'
+        ],
+        correct: 0,
+        explanation: 'الْمَسْجِدِ adalah Isim karena memiliki tanda Al- dan didahului Harf Jar مِنْ yang menjarkannya sehingga berharakat kasrah.'
+      },
+      {
+        word: 'أَبُو مُحَمَّدٍ / أَبَا مُحَمَّدٍ',
+        question: 'Lafazh "أَبُو" termasuk kelompok Asma\'ul Khamsah yang di-I\'rab dengan:',
+        options: [
+          'Dhammah Zhahirah saat Rofa\'.',
+          'Huruf (Wawu saat Rofa\', Alif saat Nashab, Ya\' saat Jar).',
+          'Harf Jar yang tidak berpengaruh.',
+          'Kasrah Muqoddaroh.'
+        ],
+        correct: 1,
+        explanation: 'Asma\'ul Khamsah (أَبُو، أَخُو، حَمُو، فُو، ذُو) di-i\'rab dengan huruf: Wawu saat Rofa\', Alif saat Nashab, dan Ya\' saat Jar.'
+      },
+      {
+        word: 'هَيْهَاتَ لِمَا تُوعَدُونَ',
+        question: 'Kata "هَيْهَاتَ" di dalam kalimat tersebut berstatus sebagai:',
+        options: [
+          'Isim Fi\'il Madhi (bina\' fathah, bermakna "jauh sekali").',
+          'Isim Mufrad Nakirah.',
+          'Fi\'il Mudhari\' majzum.',
+          'Harf Jar musyabbahah.'
+        ],
+        correct: 0,
+        explanation: 'هَيْهَاتَ adalah Isim Fi\'il Madhi berstatus mabni fathah yang bermakna "jauh sekali".'
+      },
+      {
+        word: 'جَاءَ مُوسَى',
+        question: 'Lafazh "مُوسَى" berstatus Isim Maqshur dengan I\'rab:',
+        options: [
+          'Dhammah Zhahirah tampak jelas.',
+          'Dhammah Muqoddaroh (tersembunyi karena ta\'addzur pada alif).',
+          'Fathah Zhahirah.',
+          'Kasrah Muqoddaroh.'
+        ],
+        correct: 1,
+        explanation: 'Isim Maqshur (berakhiran alif lazimah) seluruh harakat I\'rabnya berstatus Muqoddaroh (tersembunyi).'
+      },
+      {
+        word: 'إِنَّ اللَّهَ',
+        question: 'Kata "اللَّهَ" berharakat fathah (manshub) karena didahului oleh:',
+        options: [
+          'Harf Jar pengubah kasrah.',
+          'Harf Nashab Inna (Musyabbahah bil-Fi\'il).',
+          'Fi\'il Madhi.',
+          'Harf Athilah.'
+        ],
+        correct: 1,
+        explanation: 'Kata اللَّهَ didahului Harf Nashab إِنَّ yang menashabkan Isim Inna sehingga berharakat fathah.'
+      }
+    ];
+
+    let currentQIndex = 0;
+    let quizScore = 0;
+
+    function renderQuiz() {
+      const q = quizQuestions[currentQIndex];
+      document.getElementById('quizProgressText').textContent = `Soal ${currentQIndex + 1} dari ${quizQuestions.length}`;
+      document.getElementById('quizScoreText').textContent = `Skor: ${quizScore}`;
+      document.getElementById('quizArabicWord').textContent = q.word;
+      document.getElementById('quizQuestionText').textContent = q.question;
+
+      const optionsBox = document.getElementById('quizOptionsBox');
+      optionsBox.innerHTML = '';
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'py-3 px-4 text-left text-xs sm:text-sm font-semibold rounded-xl bg-emerald-900/90 hover:bg-emerald-800 border border-emerald-700/60 text-white transition active:scale-95';
+        btn.textContent = `${String.fromCharCode(65 + idx)}. ${opt}`;
+        btn.onclick = () => handleQuizAnswer(idx);
+        optionsBox.appendChild(btn);
+      });
+
+      const feedback = document.getElementById('quizFeedbackBox');
+      feedback.className = 'mt-5 p-4 rounded-xl text-center text-sm font-semibold hidden';
+    }
+
+    function handleQuizAnswer(selectedIndex) {
+      const q = quizQuestions[currentQIndex];
+      const feedback = document.getElementById('quizFeedbackBox');
+      feedback.classList.remove('hidden', 'bg-emerald-900/90', 'text-emerald-300', 'bg-rose-900/90', 'text-rose-300', 'border', 'border-emerald-500', 'border-rose-500');
+
+      if (selectedIndex === q.correct) {
+        quizScore += 20;
+        feedback.textContent = `✓ MUMTAZ! Jawaban Benar. ${q.explanation}`;
+        feedback.classList.add('bg-emerald-900/90', 'text-emerald-300', 'border', 'border-emerald-500');
+      } else {
+        feedback.textContent = `✕ Kurang Tepat. Penjelasan: ${q.explanation}`;
+        feedback.classList.add('bg-rose-900/90', 'text-rose-300', 'border', 'border-rose-500');
+      }
+
+      document.getElementById('quizScoreText').textContent = `Skor: ${quizScore}`;
+
+      setTimeout(() => {
+        if (currentQIndex < quizQuestions.length - 1) {
+          currentQIndex++;
+          renderQuiz();
+        } else {
+          showFinalQuizResult();
+        }
+      }, 2500);
+    }
+
+    function showFinalQuizResult() {
+      const container = document.getElementById('quizContainer');
+      container.innerHTML = `
+        <div class="text-center py-8 space-y-4">
+          <i data-lucide="award" class="w-16 h-16 text-gold-400 mx-auto"></i>
+          <h3 class="text-2xl font-bold text-white">Selamat! Kuis Selesai</h3>
+          <p class="text-emerald-200 text-sm">Skor Akhir Anda: <strong class="text-gold-400 text-3xl font-extrabold block mt-2">${quizScore} / 100</strong></p>
+          <button onclick="resetQuiz()" class="mt-4 px-6 py-3 bg-gold-500 hover:bg-gold-600 text-slate-950 font-bold rounded-xl text-sm transition shadow-lg">
+            Coba Kuis Lagi
+          </button>
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function resetQuiz() {
+      currentQIndex = 0;
+      quizScore = 0;
+      const container = document.getElementById('quizContainer');
+      container.innerHTML = `
+        <div class="flex justify-between items-center text-xs text-emerald-300 mb-4 font-bold">
+          <span id="quizProgressText">Soal 1 dari 5</span>
+          <span id="quizScoreText">Skor: 0</span>
+        </div>
+        <p class="text-sm sm:text-base font-semibold text-emerald-100 mb-2" id="quizQuestionText"></p>
+        <div class="arabic-font text-4xl sm:text-5xl font-bold text-gold-400 text-center py-8 bg-emerald-950/90 rounded-2xl border border-emerald-700/80 my-4 shadow-inner" id="quizArabicWord"></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6" id="quizOptionsBox"></div>
+        <div id="quizFeedbackBox" class="mt-5 p-4 rounded-xl text-center text-sm font-semibold hidden"></div>
+      `;
+      renderQuiz();
+    }
+
+    // Initialize on Page Load
+    window.onload = function() {
+      renderQuiz();
+    };
+  </script>
+</body>
+</html>
